@@ -1,0 +1,48 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+    name: projector-frontend
+spec:
+    replicas: 3
+    selector:
+        matchLabels:
+            app: projector-frontend
+            version: v1
+    template:
+            metadata:
+                labels:
+                    app: projector-frontend
+                    version: v1
+            spec:
+                containers:
+                    - name: projector-frontend
+                      image: 349142834852.dkr.ecr.us-east-2.amazonaws.com/projector-frontend:34315df6b64b3682fefb49c1e1450e3df3a5d6b5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: projector-frontend-service
+spec:
+  type: ClusterIP
+  selector:
+    app: projector-frontend
+  ports:
+    - name: frontend
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: projector-frontend-lb-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: projector-frontend
+  ports:
+    - name: frontend
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

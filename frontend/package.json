@@ -9,7 +9,8 @@
     "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1",
     "package": "./actions/package.sh",
-    "push": "./actions/push.sh"
+    "push": "./actions/push.sh",
+    "serve": "npm run serve"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,8 @@
   },
   "dependencies": {
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
-  }
+    "react-dom": "^16.12.0",
+    "serve": "^11.3.0"
+  },
+  "proxy": "http://localhost:8080"
 }

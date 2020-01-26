@@ -4,8 +4,8 @@ COPY . .
 RUN npm install
 RUN npm run build
 
-FROM mhart/alpine-node
-RUN npm install serve -g
+FROM nginx
+RUN mkdir /app
 WORKDIR /app
-COPY --from=builder /app/static .
-CMD serve -p 3000 -s .
+COPY --from=builder /app/static /app
+COPY nginx.conf /etc/nginx/nginx.conf
