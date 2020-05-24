@@ -47,7 +47,6 @@ tasks.register("package") {
 }
 
 tasks.register("push") { 
-	dependsOn("package")
     exec {
 		executable("./actions/push.sh")
 	}
