@@ -2,9 +2,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
 - name: 349142834852.dkr.ecr.us-east-2.amazonaws.com/projector-backend
-  newTag: 763e68914a71f4fed86aafab65f49f1a780da28a
+  newTag: fdcfd814ed25a18a707b19ebd83a09d76fbacdf7
 - name: 349142834852.dkr.ecr.us-east-2.amazonaws.com/projector-frontend
-  newTag: 763e68914a71f4fed86aafab65f49f1a780da28a
+  newTag: fdcfd814ed25a18a707b19ebd83a09d76fbacdf7
 resources:
 - resources/frontend.yaml
 - resources/backend.yaml
