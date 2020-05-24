@@ -1,38 +1,40 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: ReplicationController
 metadata:
-  name: mongo
+  labels:
+    name: mongo
+  name: mongo-controller
 spec:
-  selector:
-    matchLabels:
-      app: mongo
   replicas: 1
   template:
     metadata:
       labels:
-        app: mongo
+        name: mongo
     spec:
       containers:
-      - name: mongodb
-        image: mongo:latest
+      - image: mongo
+        name: mongo
         ports:
-        - containerPort: 27017
+        - name: mongo
+          containerPort: 27017
+          hostPort: 27017
         volumeMounts:
-        - name: mongo-persistent-storage
-          mountPath: /data/db
+            - name: mongo-persistent-storage
+              mountPath: /data/db
       volumes:
-      - name: mongo-persistent-storage
-        persistentVolumeClaim:
-          claimName: mongo-persistent-volume-claim
+            - name: mongo-persistent-storage
+              persistentVolumeClaim:
+              claimName: mongo-persistent-volume-claim
 ---
 apiVersion: v1
 kind: Service
 metadata:
-    name: mongo-cluster-ip-service
+  labels:
+    name: mongo
+  name: mongo
 spec:
-    type: ClusterIP
-    selector:
-        component: mongo
-    ports:
-         -   port: 27017
-             targetPort: 27017
+  ports:
+    - port: 27017
+      targetPort: 27017
+  selector:
+    name: mongo
