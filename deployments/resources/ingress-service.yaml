@@ -7,13 +7,14 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
   rules:
-      - http:
-          paths:
-            - path: /?(.*)
-              backend:
-                serviceName: frontend-cluster-ip-service
-                servicePort: 3000
-            - path: /api/?(.*)
-              backend:
-                serviceName: api-cluster-ip-service
-                servicePort: 8080
+    - host: godfall.dev.cluster.projctor.io
+      http:
+        paths:
+          - path: /?(.*)
+            backend:
+              serviceName: frontend-cluster-ip-service
+              servicePort: 3000
+          - path: /api/?(.*)
+            backend:
+              serviceName: api-cluster-ip-service
+              servicePort: 8080

@@ -10,7 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "package": "./actions/package.sh",
     "push": "./actions/push.sh",
-    "serve": "npm run serve"
+    "serve": "npm run watch && serve -p 3000 -s",
+    "prettier": "prettier --config ./.prettierrc  --write 'src/**/*.{ts,tsx}'"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.4",
+    "html-webpack-plugin": "4.3.0",
     "source-map-loader": "^0.2.4",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.5",
@@ -33,9 +35,14 @@
     "webpack-dev-server": "^3.10.1"
   },
   "dependencies": {
+    "@types/react-router-dom": "5.1.5",
+    "@types/styled-components": "5.1.0",
+    "prettier": "2.0.5",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "serve": "^11.3.0"
+    "react-router-dom": "5.2.0",
+    "serve": "11.3.1",
+    "styled-components": "5.1.1"
   },
   "proxy": "http://localhost:8080"
 }

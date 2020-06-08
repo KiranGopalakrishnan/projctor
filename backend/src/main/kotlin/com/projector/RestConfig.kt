@@ -1,6 +1,6 @@
 package com.projector
 
-import com.projector.projects.Projects
+import com.projector.users.UsersResource
 import org.glassfish.jersey.server.ResourceConfig
 import org.springframework.stereotype.Component
 
@@ -12,7 +12,7 @@ class RestConfig: ResourceConfig(){
     }
 
     fun registerEndPoints() {
-        register(Projects())
+        register(UsersResource())
     }
 
 }

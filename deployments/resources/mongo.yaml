@@ -14,6 +14,9 @@ spec:
       containers:
       - image: mongo
         name: mongo
+        env: 
+        - name: MONGO_INITDB_DATABASE
+          value: "projector-main"
         ports:
         - name: mongo
           containerPort: 27017
