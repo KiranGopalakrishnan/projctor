@@ -25,5 +25,10 @@ public class EntityCollectionImpl<T>(private val collectionName:String,private v
         return result?.let { mapper.fromDocument(it) }
     }
 
+    override fun findAll(): List<T>? {
+        var result = this.db.getCollection(this.collectionName).find();
+        return result?.let { it -> it.toList().map { document -> mapper.fromDocument(document) } }
+    }
+
 
 }

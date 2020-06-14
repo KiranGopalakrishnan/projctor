@@ -13,4 +13,6 @@ interface EntityCollection<T> {
 
     public fun findOne(filter: Bson):T?
 
+    public fun findAll(): List<T>?
+
 }

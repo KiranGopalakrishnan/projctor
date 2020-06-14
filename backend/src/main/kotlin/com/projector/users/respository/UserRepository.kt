@@ -14,4 +14,7 @@ interface UserRepository {
 
     fun findUser(username:String):User?
 
+
+    fun findAllUsers():List<User>?
+
 }

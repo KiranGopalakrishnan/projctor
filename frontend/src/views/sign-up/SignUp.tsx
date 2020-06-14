@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {colors} from '../../common/Colors';
 import { InputBox } from '../../common/components/InputBox/InputBox';
 import { Button } from '../../common/components/Button/Button';
+import { get } from '../../api/Api';
 
 const Container = styled.div`
     display: flex;
@@ -59,7 +60,9 @@ const Column = styled.div`
 
 const SignUp: React.FC = () => {
 
-    const [name,setName] = React.useState(null);
+    const [firstname,setFirstname] = React.useState(null);
+
+    const [lastname, setLastname] = React.useState(null);
 
     const [email, setEmail] = React.useState(null);
 
@@ -72,14 +75,28 @@ const SignUp: React.FC = () => {
                     <Title>Sign Up</Title>
                 </Section>
                 <Row>
-                    <InputBox
-                        label="Full Name"
-                        height={48}
-                        value={name}
-                        onChange={setName}
-                        placeholder={'Firstname Lastname'}
-                        color={' #F97F51'}
-                    />
+                    <Column>
+                        <InputBox
+                            label="Firstname"
+                            height={48}
+                            width={258}
+                            value={firstname}
+                            onChange={setFirstname}
+                            placeholder={'Firstname'}
+                            color={' #F97F51'}
+                        />
+                    </Column>
+                    <Column>
+                        <InputBox
+                            label="Lastname"
+                            height={48}
+                            width={258}
+                            value={lastname}
+                            onChange={setLastname}
+                            placeholder={'Lastname'}
+                            color={' #F97F51'}
+                        />
+                    </Column>
                 </Row>
                 <Row>
                     <InputBox

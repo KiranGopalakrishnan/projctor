@@ -14,6 +14,8 @@ class UserRepositoryImpl(val collectionFactory:CollectionFactory):UserRepository
     private val COLLECTION_NAME = "users"
     private val USERNAME = "username"
     private val PASSWORD = "password"
+    private val FIRSTNAME = "firstname"
+    private val LASTNAME = "lastname"
     private val entityCollection:EntityCollection<User> = collectionFactory.create(COLLECTION_NAME,UserDocumentMapper)
 
     override fun save(domain: User) {
@@ -22,5 +24,9 @@ class UserRepositoryImpl(val collectionFactory:CollectionFactory):UserRepository
 
     override fun findUser(username:String): User? {
         return entityCollection.findOne(Filters.eq(USERNAME,username))
+    }
+
+    override fun findAllUsers(): List<User>? {
+        return entityCollection.findAll()
     }
 }
