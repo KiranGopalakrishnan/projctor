@@ -4,21 +4,24 @@ import {SignIn} from './sign-in/SignIn';
 import {SignUp} from './sign-up/SignUp';
 import {WithGlobalStyles} from '../common/styles/GlobalStyles';
 import { Header } from '../common/components/Header/Header';
+import { UserProvider } from '../reducers/UserReducer';
 
 const App: React.FC = () => {
     return (
         <Router>
             <WithGlobalStyles>
-                <Header>
-                    <Switch>
-                        <Route path="/signin">
-                            <SignIn />
-                        </Route>
-                        <Route path="/signup">
-                            <SignUp />
-                        </Route>
-                    </Switch>
-                </Header>
+                <UserProvider>
+                    <Header>
+                        <Switch>
+                            <Route path="/signin">
+                                <SignIn />
+                            </Route>
+                            <Route path="/signup">
+                                <SignUp />
+                            </Route>
+                        </Switch>
+                    </Header>
+                </UserProvider>
             </WithGlobalStyles>
         </Router>
     );

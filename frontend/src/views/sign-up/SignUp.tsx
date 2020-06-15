@@ -4,6 +4,7 @@ import {colors} from '../../common/Colors';
 import { InputBox } from '../../common/components/InputBox/InputBox';
 import { Button } from '../../common/components/Button/Button';
 import { get } from '../../api/Api';
+import { User, addUser } from '../../services/Users';
 
 const Container = styled.div`
     display: flex;
@@ -58,15 +59,19 @@ const Column = styled.div`
     justify-content: center;
 `;
 
+const onAddUser = (user:User) => {
+    addUser(user);
+}
+
 const SignUp: React.FC = () => {
 
-    const [firstname,setFirstname] = React.useState(null);
+    const [firstname,setFirstname] = React.useState('');
 
-    const [lastname, setLastname] = React.useState(null);
+    const [lastname, setLastname] = React.useState('');
 
-    const [email, setEmail] = React.useState(null);
+    const [email, setEmail] = React.useState('');
 
-    const [password, setPassword] = React.useState(null);
+    const [password, setPassword] = React.useState('');
 
     return (
         <Container>
@@ -121,7 +126,12 @@ const SignUp: React.FC = () => {
                 </Row>
 
                 <Row>
-                    <Button color={'#F97F51'}>Signup</Button>
+                    <Button color={'#F97F51'} onClick={()=> onAddUser({
+                        firstname,
+                        lastname,
+                        email,
+                        password
+                        })}>Signup</Button>
                 </Row>
             </Form>
         </Container>

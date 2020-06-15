@@ -9,13 +9,24 @@ enum HttpRequestType {
 
 }
 
-interface Params {
+interface Payload {
     [key:string] : any
 }
 
-const get = (url: string,params:Params ) =>{
-    return axios.get(url, params)
-    .then((response: AxiosResponse) => response.data);
-}
+const get = (url: string, params: Payload) => {
+    return axios.get(url, params).then((response: AxiosResponse) => response.data);
+};
 
-export {get}
+const post = (url: string, data: Payload) => {
+    return axios.post(url, data).then((response: AxiosResponse) => response.data);
+};
+
+const put = (url: string, data: Payload) => {
+    return axios.put(url, data).then((response: AxiosResponse) => response.data);
+};
+
+const remove = (url: string) => {
+    return axios.delete(url).then((response: AxiosResponse) => response.data);
+};
+
+export {get,post,put,remove}

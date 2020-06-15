@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import {colors} from '../../common/Colors';
 import {InputBox} from '../../common/components/InputBox/InputBox';
 import {Button} from '../../common/components/Button/Button';
+import { authenticateUser } from '../../services/Users';
+import { useCurrentUser, UserActions } from '../../reducers/UserReducer';
 
 const Container = styled.div`
     display: flex;
@@ -56,46 +58,56 @@ const Column = styled.div`
     justify-content: center;
 `;
 
+const onSignIn = ({email,password}:{email: string,password: string}, userDispatch: any) =>{
+    authenticateUser({email, password}).then(data=> userDispatch({type: UserActions.SET_USER,payload:data}));
+}
+
 const SignIn: React.FC = () => {
 
-    const [email, setEmail] = React.useState(null);
+    const [email, setEmail] = React.useState('');
 
-    const [password, setPassword] = React.useState(null);
+    const [password, setPassword] = React.useState('');
+
+    const [user,userDispatch] = useCurrentUser();
 
     return (
-        <Container>
-            <Form>
-                <Section flex={2}>
-                    <Title>Sign In</Title>
-                </Section>
-                <Row>
-                    <InputBox
-                        label="Email"
-                        height={48}
-                        value={email}
-                        onChange={setEmail}
-                        placeholder={'example@domain.com'}
-                        color={' #F97F51'}
-                    />
-                </Row>
-                <Row>
-                    <InputBox
-                        label="Password"
-                        height={48}
-                        type="password"
-                        value={password}
-                        onChange={setPassword}
-                        placeholder="Password"
-                        color={' #F97F51'}
-                    />
-                </Row>
+            <Container>
+                <Form>
+                    <Section flex={2}>
+                    <Title>{user?.user?.firstname}</Title>
+                    </Section>
+                    <Row>
+                        <InputBox
+                            label="Email"
+                            height={48}
+                            value={email}
+                            onChange={setEmail}
+                            placeholder={'example@domain.com'}
+                            color={' #F97F51'}
+                        />
+                    </Row>
+                    <Row>
+                        <InputBox
+                            label="Password"
+                            height={48}
+                            type="password"
+                            value={password}
+                            onChange={setPassword}
+                            placeholder="Password"
+                            color={' #F97F51'}
+                        />
+                    </Row>
 
-                <Row>
-                    <Button color={'#F97F51'}>Signin</Button>
-                </Row>
-            </Form>
-        </Container>
+                    <Row>
+                        <Button
+                            color={'#F97F51'}
+                            onClick={() => onSignIn({email, password}, userDispatch)}
+                        >
+                            Signin
+                        </Button>
+                    </Row>
+                </Form>
+            </Container>
     );
 };
-
 export {SignIn};

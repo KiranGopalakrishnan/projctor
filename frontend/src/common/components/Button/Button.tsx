@@ -31,10 +31,15 @@ interface Props {
     width?: number;
     height?: number;
     children: React.ReactNode;
+    onClick: () => any;
 }
 
-const Button: React.FC<Props> = ({color, width, height, children}: Props) => {
-return <ButtonControl type='button' color={color} height={height} width={width} >{children}</ButtonControl>;
+const Button: React.FC<Props> = ({color, width, height, children, onClick}: Props) => {
+    return (
+        <ButtonControl type="button" color={color} height={height} width={width} onClick={onClick}>
+            {children}
+        </ButtonControl>
+    );
 };
 
 Button.defaultProps = {

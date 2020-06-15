@@ -39,6 +39,7 @@ interface Props {
 }
 
 const Header: React.FC<Props> = ({children}: Props) => {
+    console.error("RE-RENDERED");
     return (
         <Container>
                 <Row>
