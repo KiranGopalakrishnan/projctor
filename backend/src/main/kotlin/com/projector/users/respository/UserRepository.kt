@@ -12,8 +12,7 @@ interface UserRepository {
 
     fun save(domain: User)
 
-    fun findUser(username:String):User?
-
+    fun findUser(email:String):User?
 
     fun findAllUsers():List<User>?
 

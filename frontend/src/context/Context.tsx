@@ -1,11 +1,11 @@
 import * as React from 'react';
 
-interface Action <T>{
+interface Action<T> {
     type: T;
     payload: any;
 }
 
-const createStore = <T, P>(reducer: (state: T,action:Action<P>) => T, initialState: T) => {
+const createStore = <T, P>(reducer: (state: T, action: Action<P>) => T, initialState: T) => {
     const stateContext = React.createContext(null);
 
     const reducerContext = React.createContext(null);
@@ -46,6 +46,4 @@ const createStore = <T, P>(reducer: (state: T,action:Action<P>) => T, initialSta
     return [StatefulProvider, useStateHook];
 };
 
-
-
-export {createStore,Action};
+export {createStore, Action};

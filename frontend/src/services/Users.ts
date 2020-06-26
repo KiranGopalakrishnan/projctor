@@ -1,4 +1,5 @@
-import { post } from "../api/Api"
+import {post} from '../api/Api';
+import {projectorUrl} from './utils';
 
 interface User {
     firstname: string;
@@ -7,14 +8,12 @@ interface User {
     password: string;
 }
 
-const projectorUrl = (url: string) => `rest/projector/${url}`;
-
 const addUser = (user: User) => {
-    return post(projectorUrl('users'),user);
+    return post(projectorUrl('users'), user);
 };
 
 const authenticateUser = ({email, password}: {email: string; password: string}) => {
-    return post(projectorUrl('users/authenticate'), {email, password})
+    return post(projectorUrl('users/authenticate'), {email, password});
 };
 
 export {addUser, User, authenticateUser};

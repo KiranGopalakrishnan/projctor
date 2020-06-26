@@ -1,12 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-
-
 const getHeight = ({height}: {height: number}) => height;
-const getWidth = ({width}: {width: number}) => width;
+const getWidth = ({width}: {width: number}) => (width ? `${width}px` : '100%');
 const getColor = ({color}: {color: string}) => color;
-const getFocusedColor = ({focused, color}:{focused: boolean; color: string}) => focused ? color : '#E1E1E1' ;
+const getFocusedColor = ({focused, color}: {focused: boolean; color: string}) =>
+    focused ? color : '#E1E1E1';
 
 const Container = styled.div<{height: number; width: number; color: string; focused: boolean}>`
     display: flex;
@@ -14,7 +13,7 @@ const Container = styled.div<{height: number; width: number; color: string; focu
     flex: 1;
     height: 100%;
     height: ${getHeight}px;
-    width: ${getWidth}px;
+    width: ${getWidth};
     border: solid 1px ${getFocusedColor};
     border-radius: 5px;
     justify-content: center;
@@ -27,7 +26,7 @@ const Input = styled.input<{height: number; width: number; color: string}>`
     flex-direction: column;
     padding: 4px 8px;
     box-sizing: border-box;
-    width: ${getWidth}px;
+    width: ${getWidth};
     color: #333;
     font-weight: 200;
     background: transparent;
@@ -40,10 +39,9 @@ const Input = styled.input<{height: number; width: number; color: string}>`
     }
 
     ::placeholder {
-        color: #D3D3D3;
+        color: #d3d3d3;
     }
 `;
-
 
 const Label = styled.label<{color: string}>`
     padding: 0 4px;
@@ -51,24 +49,32 @@ const Label = styled.label<{color: string}>`
     position: absolute;
     top: -12px;
     left: 32px;
-    background: #FFF;
+    background: #fff;
     font-size: 14px;
 `;
 
 interface Props {
-    height?: number,
-    value: string,
-    placeholder?: string,
-    width?: number,
+    height?: number;
+    value: string;
+    placeholder?: string;
+    width?: number;
     onChange: (value: string) => any;
     type?: string;
     label: string;
     color: string;
 }
 
-const InputBox: React.FC<Props> = ({height, value, placeholder, width, onChange, type, label, color}:Props ) => {
-
-    const [isFocused,setIsFocused] = React.useState(false);
+const InputBox: React.FC<Props> = ({
+    height,
+    value,
+    placeholder,
+    width,
+    onChange,
+    type,
+    label,
+    color,
+}: Props) => {
+    const [isFocused, setIsFocused] = React.useState(false);
 
     return (
         <Container height={height} width={width} color={color} focused={isFocused}>
@@ -87,13 +93,12 @@ const InputBox: React.FC<Props> = ({height, value, placeholder, width, onChange,
             <span />
         </Container>
     );
-    };
+};
 
 InputBox.defaultProps = {
-    height: 40,   
-    placeholder: undefined, 
-    width: 300,
-    type: "text",
-}
+    height: 40,
+    placeholder: undefined,
+    type: 'text',
+};
 
 export {InputBox};
