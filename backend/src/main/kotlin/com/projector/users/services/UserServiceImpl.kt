@@ -3,7 +3,6 @@ package com.projector.users.services
 import com.projector.common.http.NotFound
 import com.projector.common.http.Response
 import com.projector.common.http.Success
-import com.projector.users.modal.Password
 import com.projector.users.modal.User
 import com.projector.users.respository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -30,8 +29,8 @@ class UserServiceImpl:UserService {
         return Success(user)
     }
 
-    override fun authenticateUser(username:String,password: String): Response<User> {
-        val user = userRepository.findUser(username = username);
+    override fun authenticateUser(email:String, password: String): Response<User> {
+        val user = userRepository.findUser(email = email);
             return if(user != null && user.password.matches(password)) {
                 Success(user)
             }else{

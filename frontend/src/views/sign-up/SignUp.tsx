@@ -1,9 +1,12 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import {colors} from '../../common/Colors';
-import { InputBox } from '../../common/components/InputBox/InputBox';
-import { Button } from '../../common/components/Button/Button';
-import { get } from '../../api/Api';
+import {InputBox} from '../../common/components/InputBox/InputBox';
+import {Button} from '../../common/components/Button/Button';
+import {get} from '../../api/Api';
+import {User, addUser} from '../../services/Users';
+import {useCurrentUser, CurrentUserActions} from '../../reducers/CurrentUserReducer';
+import {useHistory} from 'react-router-dom';
 
 const Container = styled.div`
     display: flex;
@@ -26,7 +29,7 @@ const Title = styled.h3`
     font-weight: 300;
     flex: 1;
     height: 100%;
-    border-bottom: 1px solid #F97F51;
+    border-bottom: 1px solid ${colors.PURPLE[900]}};
     justify-content: center;
     padding: 8px 0;
 `;
@@ -35,7 +38,7 @@ const Form = styled.form`
     display: flex;
     flex-direction: column;
     width: 700px;
-    border: solid 1px #e2e2e2;
+    border: solid 1px ${colors.PURPLE[900]};
     border-radius: 10px;
     padding: 0 80px;
     box-sizing: border-box;
@@ -50,7 +53,6 @@ const Row = styled.section`
     padding: 16px 0;
 `;
 
-
 const Column = styled.div`
     padding: 8px;
     display: flex;
@@ -58,15 +60,25 @@ const Column = styled.div`
     justify-content: center;
 `;
 
+const onAddUser = (user: User, dispatchUser: Function, history: any) => {
+    addUser(user).then(() => {
+        dispatchUser({type: CurrentUserActions.SET_USER, payload: {user}});
+        history.push('/home');
+    });
+};
+
 const SignUp: React.FC = () => {
+    const [currentUser, dispatchUser] = useCurrentUser();
 
-    const [firstname,setFirstname] = React.useState(null);
+    let history = useHistory();
 
-    const [lastname, setLastname] = React.useState(null);
+    const [firstname, setFirstname] = React.useState('');
 
-    const [email, setEmail] = React.useState(null);
+    const [lastname, setLastname] = React.useState('');
 
-    const [password, setPassword] = React.useState(null);
+    const [email, setEmail] = React.useState('');
+
+    const [password, setPassword] = React.useState('');
 
     return (
         <Container>
@@ -83,7 +95,7 @@ const SignUp: React.FC = () => {
                             value={firstname}
                             onChange={setFirstname}
                             placeholder={'Firstname'}
-                            color={' #F97F51'}
+                            color={colors.PURPLE[900]}
                         />
                     </Column>
                     <Column>
@@ -94,7 +106,7 @@ const SignUp: React.FC = () => {
                             value={lastname}
                             onChange={setLastname}
                             placeholder={'Lastname'}
-                            color={' #F97F51'}
+                            color={colors.PURPLE[900]}
                         />
                     </Column>
                 </Row>
@@ -105,7 +117,7 @@ const SignUp: React.FC = () => {
                         value={email}
                         onChange={setEmail}
                         placeholder={'example@domain.com'}
-                        color={' #F97F51'}
+                        color={colors.PURPLE[900]}
                     />
                 </Row>
                 <Row>
@@ -116,12 +128,29 @@ const SignUp: React.FC = () => {
                         value={password}
                         onChange={setPassword}
                         placeholder="Password"
-                        color={' #F97F51'}
+                        color={colors.PURPLE[900]}
                     />
                 </Row>
 
                 <Row>
-                    <Button color={'#F97F51'}>Signup</Button>
+                    <Button
+                        color={colors.PURPLE[900]}
+                        fillColor={colors.PURPLE[900]}
+                        onClick={() =>
+                            onAddUser(
+                                {
+                                    firstname,
+                                    lastname,
+                                    email,
+                                    password,
+                                },
+                                dispatchUser,
+                                history
+                            )
+                        }
+                    >
+                        Signup
+                    </Button>
                 </Row>
             </Form>
         </Container>

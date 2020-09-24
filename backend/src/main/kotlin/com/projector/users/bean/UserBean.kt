@@ -4,7 +4,7 @@ import com.projector.users.modal.User
 
 data class UserBean(
         val id: String?,
-        val username: String,
+        val email: String,
         val firstname: String?,
         val lastname: String?
 ) {
@@ -12,7 +12,7 @@ data class UserBean(
         fun from(user: User): UserBean {
             return UserBean(
                     id = user.id?.value,
-                    username = user.username,
+                    email = user.email,
                     firstname = user.firstname,
                     lastname = user.lastname
             )

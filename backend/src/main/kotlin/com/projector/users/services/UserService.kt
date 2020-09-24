@@ -12,6 +12,6 @@ interface UserService {
 
     fun addUser(user: User): Response<User>
 
-    fun authenticateUser(username:String,password:String): Response<User>
+    fun authenticateUser(email:String, password:String): Response<User>
 
 }

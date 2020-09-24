@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { colors } from '../../Colors';
+import {colors} from '../../Colors';
 
 const Container = styled.div`
     display: flex;
@@ -9,7 +9,7 @@ const Container = styled.div`
     height: 100%;
 `;
 
-const Section = styled.section`
+const Section = styled.div`
     display: flex;
     flex-direction: column;
     flex: ${(props: {flex: number}) => props.flex};
@@ -17,8 +17,8 @@ const Section = styled.section`
     box-sizing: border-box;
 `;
 
-const Row = styled.section`
-   display: flex;
+const Row = styled.div`
+    display: flex;
     flex-direction: row;
     height: 64px;
     padding: 8px;
@@ -41,12 +41,12 @@ interface Props {
 const Header: React.FC<Props> = ({children}: Props) => {
     return (
         <Container>
-                <Row>
-                    <Section flex={2}>
-                        <Text>Projector</Text>
-                    </Section>
-                    <Section flex={8}></Section>
-                </Row>
+            <Row>
+                <Section flex={2}>
+                    <Text>Projector</Text>
+                </Section>
+                <Section flex={8}></Section>
+            </Row>
             <Section flex={1}>{children}</Section>
         </Container>
     );
